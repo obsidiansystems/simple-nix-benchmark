@@ -12,7 +12,7 @@ let ids = builtins.genList (n: n + 1) number;
       ];
     } ''
       mkdir $out
-      dd if=/dev/zero bs=${toString length} count=1 | openssl enc -$encryption_method -pass pass:${key + "-" + toString n} | gzip > $out/item-${toString n}.gz
+      dd if=/dev/zero bs=${toString length} count=1 | openssl enc -aes-256-cbc -pass pass:${key + "-" + toString n} | gzip > $out/item-${toString n}.gz
     '';
 in
 pkgs.runCommand "assemble" {
